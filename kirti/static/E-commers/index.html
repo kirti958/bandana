@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ShopKart - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">ShopKart</div>
+        <input type="text" placeholder="Search for products...">
+        <div class="menu">
+            <a href="account.html">Account</a>
+            <a href="cart.html">Cart</a>
+            <a href="orders.html">Orders</a>
+        </div>
+    </header>
+
+    <nav>
+        <a href="electronics.html">Electronics</a>
+        <a href="fashion.html">Fashion</a>
+        <a href="#">Home</a>
+        <a href="#">Mobiles</a>
+        <a href="#">Books</a>
+    </nav>
+
+    <section class="banner">
+        <img src="imagess/111.jfif">
+    </section>
+
+    <h2 class="section-title">Trending Products</h2>
+
+    <section class="products">
+
+        <div class="card">
+            <img src="imagess/mac.jfif">
+            <h3>Mac Air 13</h3>
+            <p>₹45,999</p>
+            <button onclick="addToCart('Laptop', 45999)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="imagess/opo phone.jfif">
+            <h3> Oppo Smartphone</h3>
+            <p>₹19,999</p>
+            <button onclick="addToCart('Smartphone', 19999)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="headphone.jfif">
+            <h3>Headphones</h3>
+            <p>₹2,999</p>
+            <button onclick="addToCart('Headphones', 2999)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="imagess/watch.jfif">
+            <h3>Watch</h3>
+            <p>₹4,999</p>
+            <button onclick="addToCart('Watch', 4999)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <img src="imagess/apple.jfif">
+            <h3> iphone17 charger</h3>
+            <p>₹3000</p>
+            <button onclick="addToCart('iphone17 Charger', 3000)">Add to Cart</button>
+        </div>
+    </section>
+
+
+    <section class="banners">
+        <img src="imagess/09690baa-e242-4a9d-8f5e-c42605dc0e7b.jfif">
+    </section>
+    <section class="products">
+
+        <div class="card">
+            <img src="imagess/download.jfif">
+            <h3>Push & Go Toy</h3>
+            <p>₹499</p>
+            <button onclick="addToCart('Toy', 4999)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="imagess/dinner.jfif">
+            <h3>Ceremic Dinner Set</h3>
+            <p>₹3999</p>
+            <button onclick="addToCart('Ceremic Dinner Set', 3999)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="imagess/download (1).jfif">
+            <h3>4k inch LED</h3>
+            <p>₹1,4500</p>
+            <button onclick="addToCart('4k inch LED', 1,45000)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="imagess/images.jfif">
+            <h3>Air Jorden</h3>
+            <p>₹18000</p>
+            <button onclick="addToCart('Air Jorden', 18000)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="imagess/goldd.jfif">
+            <h3>Gold jewellery</h3>
+            <p>₹2000</p>
+            <button onclick="addToCart('Gold jewellery', 2000)">Add to Cart</button>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="card">
+            <img src="imagess/nightsuit.jfif">
+            <h3>NightSuit For girls</h3>
+            <p>₹600</p>
+            <button onclick="addToCart('NightSuit', 600)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="imagess/slipers.jfif">
+            <h3>Comfortable slippers</h3>
+            <p>₹350</p>
+            <button onclick="addToCart('Comfortable slipers', 350)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="imagess/shopping.webp">
+            <h3>Doms colors kit</h3>
+            <p>₹562</p>
+            <button onclick="addToCart('Doms colors kit', 562)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="imagess/mama.webp">
+            <h3>Rice facewash MamaEarth</h3>
+            <p>₹464</p>
+            <button onclick="addToCart('Rice facewash MamaEarth', 464)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="imagess/boat.webp">
+            <h3>Boat Earbuds</h3>
+            <p>₹360</p>
+            <button onclick="addToCart('Boat Earbuds', 360)">Add to Cart</button>
+        </div>
+    </section>
+
+
+
+
+    <footer>
+        <p>© 2026 ShopKart | All Rights Reserved</p>
+        <p>Contact: support@shopkart.com</p>
+    </footer>
+
+    <script>
+        function addToCart(name, price) {
+
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            let existingProduct = cart.find(item => item.name === name);
+
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            alert(name + " added to cart successfully!");
+        }
+    </script>
+
+</body>
+
+</html>

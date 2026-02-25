@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cart - ShopKart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">ShopKart</div>
+    <div class="menu">
+        <a href="index.html">Home</a>
+    </div>
+</header>
+
+<div class="cart-container" id="cartContainer"></div>
+
+<script>
+
+// Load Cart
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Show Cart
+function displayCart() {
+    const container = document.getElementById("cartContainer");
+
+    if (cart.length === 0) {
+        container.innerHTML = `
+            <div class="empty-cart">
+                <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png">
+                <h2>Your cart feels empty</h2>
+                <p>Add items to start shopping</p>
+            </div>
+        `;
+        return;
+    }
+
+    let total = 0;
+    let html = `<h2>Your Order Details</h2>`;
+
+    cart.forEach((item, index) => {
+        total += item.price * item.quantity;
+
+        html += `
+        <div class="cart-item">
+            <h3>${item.name}</h3>
+            <p>Price: ₹${item.price}</p>
+            <p>
+                Quantity:
+                <input type="number" value="${item.quantity}" min="1"
+                onchange="updateQuantity(${index}, this.value)">
+            </p>
+            <p>Total: ₹${item.price * item.quantity}</p>
+        </div>
+        `;
+    });
+
+    let delivery = total < 1000 ? 40 : 0;
+    let grandTotal = total + delivery;
+
+    html += `
+        <hr>
+        <h3>Price Details</h3>
+        <p>Subtotal: ₹${total}</p>
+        <p>Delivery: ₹${delivery}</p>
+        <h2>Grand Total: ₹${grandTotal}</h2>
+
+        <h3>Select Payment Method</h3>
+        <select id="payment">
+            <option>Cash on Delivery</option>
+            <option>Online Payment</option>
+        </select>
+
+        <button onclick="confirmOrder()">Confirm Order</button>
+    `;
+
+    container.innerHTML = html;
+}
+
+// Update Quantity
+function updateQuantity(index, qty) {
+    cart[index].quantity = parseInt(qty);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    displayCart();
+}
+
+// Confirm Order
+
+function confirmOrder() {
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    let newOrder = {
+        id: "ORD" + Math.floor(Math.random() * 100000),
+        items: cart,
+        payment: document.getElementById("payment").value,
+        status: "Confirmed",
+        date: new Date().toLocaleDateString()
+    };
+
+    orders.push(newOrder);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    localStorage.removeItem("cart");
+
+    window.location.href = "orders.html";   // make sure file name correct
+}
+
+
+
+displayCart();
+
+
+
+</script>
+
+</body>
+</html>

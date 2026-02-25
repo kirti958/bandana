@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">ShopKart</div>
+    <a href="index.html">Home</a>
+</header>
+
+<div class="cart-container" id="ordersContainer"></div>
+<script>
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const container = document.getElementById("ordersContainer");
+
+if (orders.length === 0) {
+
+    container.innerHTML = `
+        <div class="empty-cart">
+            <h2>No Orders Yet</h2>
+            <p>Start shopping now!</p>
+        </div>
+    `;
+
+} else {
+
+    let html = `<h2>My Orders</h2>`;
+
+    orders.forEach(order => {
+
+        html += `
+        <div class="cart-item">
+            <h3>Order ID: ${order.id}</h3>
+            <p>Date: ${order.date}</p>
+            <p>Payment: ${order.payment}</p>
+            <p>Status: ${order.status} ✅</p>
+            <p>Estimated Delivery: 3-5 Days 🚚</p>
+            <hr>
+        `;
+
+        order.items.forEach(item => {
+            html += `
+                <p>${item.name} | Qty: ${item.quantity} | ₹${item.price}</p>
+            `;
+        });
+
+        html += `
+            <br>
+            <button onclick="removeOrder('${order.id}')" 
+                    style="background:red;color:white;padding:6px 10px;border:none;border-radius:5px;cursor:pointer;">
+                ❌ Cancel Order
+            </button>
+        </div>
+        <br>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+
+// 🔥 REMOVE FUNCTION
+function removeOrder(orderId) {
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    orders = orders.filter(order => order.id !== orderId);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    location.reload();
+}
+
+</script>
+
+</body>
+</html>
