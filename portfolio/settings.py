@@ -29,10 +29,6 @@ ALLOWED_HOSTS = ['.onrender.com'
 
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://bandana-6.onrender.com",
-]
-
 
 # Application definition
 
