@@ -23,9 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=bcph!l@+2hvce9eqbg8p7!18rqriub9xt-ph@cwno3)d-)^ly'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "bandana-6.onrender.com",
+    ".onrender.com"  # allows all Render subdomains
+
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://bandana-6.onrender.com",
+]
 
 
 # Application definition
